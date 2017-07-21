@@ -7,7 +7,7 @@ use Date::Utility;
 use Exporter 'import';
 use File::ShareDir;
 use Text::Iconv;
-use YAML qw/LoadFile/;
+use YAML::XS qw/LoadFile/;
 use utf8;
 
 our $VERSION = '0.01';
