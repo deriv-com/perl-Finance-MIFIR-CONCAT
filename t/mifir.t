@@ -2,7 +2,7 @@ use 5.014;
 use warnings;
 use strict;
 use Test::More;
-use Finance::MIFIR::CONCAT qw/mifir_concat/;
+use Finance::MIFIR::CONCAT qw/mifir_concat concat/;
 use utf8;
 
 is mifir_concat({
