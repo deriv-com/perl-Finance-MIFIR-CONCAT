@@ -3,6 +3,8 @@ use 5.014;
 use warnings;
 use strict;
 
+our $VERSION = '0.01';
+
 use Date::Utility;
 use Exporter 'import';
 use File::ShareDir;
@@ -10,8 +12,7 @@ use Text::Iconv;
 use YAML::XS qw/LoadFile/;
 use utf8;
 
-our $VERSION = '0.01';
-our @EXPORT = qw(concat mifir_concat);
+our @EXPORT_OK = qw(mifir_concat);
 
 =head1 NAME
 
@@ -19,18 +20,8 @@ Finance::MIFIR::CONCAT - provides CONCAT code generation out of client data acco
 
 =head1 SYNOPSIS
 
-    use Finance::MIFIR::CONCAT;
-
-    print Finance::MIFIR::CONCAT::concat({
-        cc          => 'DE',
-        date        => '1960-01-01',
-        first_name  => 'Jack',
-        last_name   => 'Daniels',
-    });
-
-    or
-
     use Finance::MIFIR::CONCAT qw/mifir_concat/;
+
     print mifir_concat({
         cc          => 'DE',
         date        => '1960-01-01',
@@ -38,13 +29,23 @@ Finance::MIFIR::CONCAT - provides CONCAT code generation out of client data acco
         last_name   => 'Daniels',
     });
 
+=head1 DESCRIPTION
+
+=cut
+
+=head2 mifir_concat
+
+ Accepts hashref of person's data with keys: cc, date, first_name, last_name.
+
+ Returns string representing CONCATed MIFIR ID.
+
 =cut
 
 my $converter = Text::Iconv->new("UTF-8", "ASCII//TRANSLIT//IGNORE");
 our $config       = LoadFile(File::ShareDir::dist_file('Finance-MIFIR-CONCAT', 'mifir.yml'));
 our $romanization = LoadFile(File::ShareDir::dist_file('Finance-MIFIR-CONCAT', 'romanization.yml'));
 
-sub concat {
+sub mifir_concat {
     my $args = shift;
     my $cc   = $args->{cc};
     my $date = Date::Utility->new($args->{date})->date_yyyymmdd;
@@ -65,7 +66,5 @@ sub _process_name {
     $str = substr($str . '######', 0, 5);
     return $str;
 }
-
-*mifir_concat = \&concat;
 
 1;
