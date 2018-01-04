@@ -60,7 +60,6 @@ sub _process_name {
     $str = lc($str);
     $str =~ s/$_\s+//g for (@{$config->{titles}}, @{$config->{prefixes}});
     $str = unidecode($str);
-    #$str =~ s/’//g;    # our iconv does not handle this correctly, it returns empty string if we have it
     $str = $converter->convert(encode_utf8($str));
     $str =~ s/[^a-z]//g;
     $str = substr($str . '######', 0, 5);
