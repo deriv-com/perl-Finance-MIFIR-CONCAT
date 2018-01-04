@@ -36,7 +36,8 @@ is Finance::MIFIR::CONCAT::_process_name('Аркадий'),       'arkad', 'russ
 is Finance::MIFIR::CONCAT::_process_name('Стругацкий'), 'strug', 'russian check';
 is Finance::MIFIR::CONCAT::_process_name('АЙЗЕК'),           'aizek', 'russian check';
 is Finance::MIFIR::CONCAT::_process_name('Азимов'),         'azimo', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Бьёрн'),           'bern#', 'russian check';
+is Finance::MIFIR::CONCAT::_process_name('Бьёрн'),           'biorn', 'russian check';
 is Finance::MIFIR::CONCAT::_process_name('Страуструп'), 'strau', 'russian check';
-
+is Finance::MIFIR::CONCAT::_process_name('Kirchg\x{e4}\x{df}ner'),'kirch', 'de check';
+is Finance::MIFIR::CONCAT::_process_name('Abc’def'),'abcde', 'test ’ character';
 done_testing();
