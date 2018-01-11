@@ -4,7 +4,7 @@ use strict;
 use Test::More;
 use Finance::MIFIR::CONCAT qw/mifir_concat/;
 use utf8;
-
+binmode(STDOUT,":utf8");
 is mifir_concat({
         cc         => 'fr',
         date       => '17-03-1986',
@@ -38,6 +38,7 @@ is Finance::MIFIR::CONCAT::_process_name('АЙЗЕК'),           'aizek', 'russ
 is Finance::MIFIR::CONCAT::_process_name('Азимов'),         'azimo', 'russian check';
 is Finance::MIFIR::CONCAT::_process_name('Бьёрн'),           'biorn', 'russian check';
 is Finance::MIFIR::CONCAT::_process_name('Страуструп'), 'strau', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Kirchg\x{e4}\x{df}ner'),'kirch', 'de check';
+is Finance::MIFIR::CONCAT::_process_name("Kirchg\x{e4}\x{df}ner"),'kirch', 'de check';
 is Finance::MIFIR::CONCAT::_process_name('Abc’def'),'abcde', 'test ’ character';
+is Finance::MIFIR::CONCAT::_process_name("g\x{e4}\x{df}ner"),'gassn', 'de check';
 done_testing();
