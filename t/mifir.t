@@ -40,5 +40,11 @@ is Finance::MIFIR::CONCAT::_process_name('Бьёрн'),           'biorn', 'russ
 is Finance::MIFIR::CONCAT::_process_name('Страуструп'), 'strau', 'russian check';
 is Finance::MIFIR::CONCAT::_process_name("Kirchg\x{e4}\x{df}ner"),'kirch', 'de check';
 is Finance::MIFIR::CONCAT::_process_name('Abc’def'),'abcde', 'test ’ character';
-is Finance::MIFIR::CONCAT::_process_name("g\x{e4}\x{df}ner"),'gassn', 'de check';
+is Finance::MIFIR::CONCAT::_process_name("gäßner"),'gasne', 'de check';
+is Finance::MIFIR::CONCAT::_process_name("gẞner"),'gsner', 'de check';
+is Finance::MIFIR::CONCAT::_process_name("gæner"),'ganer', 'de check';
+is Finance::MIFIR::CONCAT::_process_name("gŒner"),'goner', 'de check';
+is Finance::MIFIR::CONCAT::_process_name("gþner"),'gtner', 'de check';
+is Finance::MIFIR::CONCAT::_process_name("gÞner"),'gtner', 'de check';
+
 done_testing();
