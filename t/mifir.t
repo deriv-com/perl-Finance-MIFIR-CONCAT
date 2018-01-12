@@ -62,6 +62,8 @@ is Finance::MIFIR::CONCAT::_process_name('þŻÓøẞ'), 'tzoos', 'character che
 is Finance::MIFIR::CONCAT::_process_name('ôļŘķň'), 'olrkn', 'character check';
 is Finance::MIFIR::CONCAT::_process_name('źĶŷÉń'), 'zkyen', 'character check';
 is Finance::MIFIR::CONCAT::_process_name('ÌÞŸĜÑ'), 'itygn', 'character check';
-
-
+is Finance::MIFIR::CONCAT::_process_name('heŸĜÑ'), 'heygn', 'ascii will be kept';
+is Finance::MIFIR::CONCAT::_process_name('heŸ`1ĜÑ'), 'heygn', 'other character will be dropped';
+is Finance::MIFIR::CONCAT::_process_name('helloooo'), 'hello', 'Only first 5 characters will be kept';
+is Finance::MIFIR::CONCAT::_process_name('he'), 'he###', '# will be filled if less than 5 characters';
 done_testing();
