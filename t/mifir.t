@@ -32,11 +32,36 @@ is mifir_concat({
     ),
     'AT19550527JOSEPSTRAU', 'Dr Joseph van der Strauss, born 27th May 1955, national of Austria and Germany';
 
-is Finance::MIFIR::CONCAT::_process_name('Аркадий'),       'arkad', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Стругацкий'), 'strug', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('АЙЗЕК'),           'aizek', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Азимов'),         'azimo', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Бьёрн'),           'bern#', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Страуструп'), 'strau', 'russian check';
+is Finance::MIFIR::CONCAT::_process_name('ßŚáŹł'), 'ssazl', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ĄŴÇĎŇ'), 'awcdn', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('êŽǍţš'), 'ezats', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ěęŐÒñ'), 'eeoon', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ĝœëşĚ'), 'goese', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('åÝćųĺ'), 'aycul', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ĵăżÔť'), 'jazot', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ÄĥÆÜĘ'), 'ahaue', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ÁďľĐą'), 'adlda', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('àÕìÍÂ'), 'aoiia', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('řïůŰÖ'), 'riuuo', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('õŒØŁȚ'), 'ooolt', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ĽÃĤæè'), 'lahae', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('éĞğçț'), 'eggct', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('űŃģÿó'), 'ungyo', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ÊúĻčÅ'), 'eulca', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ĉâÀŮő'), 'caauo', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('îŨĹĢÙ'), 'iulgu', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ıŢÎýŝ'), 'itiys', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ŤŕòŲČ'), 'trouc', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('íśÏșÛ'), 'isisu', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('đûËŵĈ'), 'duewc', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ùüžĴð'), 'uuzjd', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ŜŠÈŔã'), 'ssera', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ĆŶäȘũ'), 'cyasu', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ÚŞǎöĂ'), 'usaoa', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('þŻÓøẞ'), 'tzoos', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ôļŘķň'), 'olrkn', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('źĶŷÉń'), 'zkyen', 'character check';
+is Finance::MIFIR::CONCAT::_process_name('ÌÞŸĜÑ'), 'itygn', 'character check';
+
 
 done_testing();

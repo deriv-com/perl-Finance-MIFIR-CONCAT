@@ -1,6 +1,5 @@
 requires 'YAML::XS';
 requires 'Date::Utility';
-requires 'Text::Iconv';
 requires 'perl', '5.014';
 
 on configure => sub {

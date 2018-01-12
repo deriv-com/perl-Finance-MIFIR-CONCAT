@@ -57,19 +57,13 @@ sub mifir_concat {
 
 sub _process_name {
     my ($str) = @_;
-    warn "line " . __LINE__ . ":".$str;
+    $str = lc($str);
     $str =~ s/$_\s+//g for (@{$config->{titles}}, @{$config->{prefixes}});
-    warn "line " . __LINE__ . ":".$str;
     $str =~ s/$_/$romanization->{$_}/g for keys %$romanization;
-    warn "line " . __LINE__ . ":".$str;
     #    $str =~ s/’//g;    # our iconv does not handle this correctly, it returns empty string if we have it
     #    $str = $converter->convert($str);
-    $str =~ s/[^a-zA-Z]//g;
-    warn "line " . __LINE__ . ":".$str;
-    $str = lc($str);
-    warn "line " . __LINE__ . ":".$str;
+    $str =~ s/[^a-z]//g;
     $str = substr($str . '######', 0, 5);
-    warn "line " . __LINE__ . ":".$str;
     return $str;
 }
 
