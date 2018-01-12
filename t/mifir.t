@@ -4,7 +4,7 @@ use strict;
 use Test::More;
 use Finance::MIFIR::CONCAT qw/mifir_concat/;
 use utf8;
-binmode(STDOUT,":utf8");
+
 is mifir_concat({
         cc         => 'fr',
         date       => '17-03-1986',
@@ -36,15 +36,7 @@ is Finance::MIFIR::CONCAT::_process_name('Аркадий'),       'arkad', 'russ
 is Finance::MIFIR::CONCAT::_process_name('Стругацкий'), 'strug', 'russian check';
 is Finance::MIFIR::CONCAT::_process_name('АЙЗЕК'),           'aizek', 'russian check';
 is Finance::MIFIR::CONCAT::_process_name('Азимов'),         'azimo', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Бьёрн'),           'biorn', 'russian check';
+is Finance::MIFIR::CONCAT::_process_name('Бьёрн'),           'bern#', 'russian check';
 is Finance::MIFIR::CONCAT::_process_name('Страуструп'), 'strau', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name("Kirchg\x{e4}\x{df}ner"),'kirch', 'de check';
-is Finance::MIFIR::CONCAT::_process_name('Abc’def'),'abcde', 'test ’ character';
-is Finance::MIFIR::CONCAT::_process_name("gäßner"),'gasne', 'de check';
-is Finance::MIFIR::CONCAT::_process_name("gẞner"),'gsner', 'de check';
-is Finance::MIFIR::CONCAT::_process_name("gæner"),'ganer', 'de check';
-is Finance::MIFIR::CONCAT::_process_name("gŒner"),'goner', 'de check';
-is Finance::MIFIR::CONCAT::_process_name("gþner"),'gtner', 'de check';
-is Finance::MIFIR::CONCAT::_process_name("gÞner"),'gtner', 'de check';
 
 done_testing();

@@ -11,8 +11,7 @@ use File::ShareDir;
 use Text::Iconv;
 use YAML::XS qw/LoadFile/;
 use utf8;
-use Text::Unidecode;
-use Encode qw/encode_utf8/;
+binmode(STDERR, ":utf8");
 our @EXPORT_OK = qw(mifir_concat);
 
 =head1 NAME
@@ -42,8 +41,9 @@ Finance::MIFIR::CONCAT - provides CONCAT code generation out of client data acco
 
 =cut
 
-my $converter = Text::Iconv->new("UTF-8", "ASCII//TRANSLIT//IGNORE");
+#my $converter = Text::Iconv->new("UTF-8", "ASCII//TRANSLIT//IGNORE");
 our $config       = LoadFile(File::ShareDir::dist_file('Finance-MIFIR-CONCAT', 'mifir.yml'));
+our $romanization = LoadFile(File::ShareDir::dist_file('Finance-MIFIR-CONCAT', 'romanization.yml'));
 
 sub mifir_concat {
     my $args = shift;
@@ -57,12 +57,19 @@ sub mifir_concat {
 
 sub _process_name {
     my ($str) = @_;
-    $str = lc($str);
+    warn "line " . __LINE__ . ":".$str;
     $str =~ s/$_\s+//g for (@{$config->{titles}}, @{$config->{prefixes}});
-    $str = unidecode($str);
-    $str = $converter->convert(encode_utf8($str));
-    $str =~ s/[^a-z]//g;
+    warn "line " . __LINE__ . ":".$str;
+    $str =~ s/$_/$romanization->{$_}/g for keys %$romanization;
+    warn "line " . __LINE__ . ":".$str;
+    #    $str =~ s/’//g;    # our iconv does not handle this correctly, it returns empty string if we have it
+    #    $str = $converter->convert($str);
+    $str =~ s/[^a-zA-Z]//g;
+    warn "line " . __LINE__ . ":".$str;
+    $str = lc($str);
+    warn "line " . __LINE__ . ":".$str;
     $str = substr($str . '######', 0, 5);
+    warn "line " . __LINE__ . ":".$str;
     return $str;
 }
 
