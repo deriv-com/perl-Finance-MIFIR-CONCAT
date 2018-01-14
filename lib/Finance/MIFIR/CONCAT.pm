@@ -55,8 +55,12 @@ sub mifir_concat {
 sub _process_name {
     my ($str) = @_;
     $str = lc($str);
-    $str =~ s/$_\s+//g for (@{$config->{titles}}, @{$config->{prefixes}});
-    $str =~ s/$_/$romanization->{$_}/g for keys %$romanization;
+    my $strip_re = join "|", (@{$config->{titles}}, @{$config->{prefixes}});
+    $strip_re = qr/($strip_re)\s+/;
+    $str =~ s/$strip_re//g;
+    my $re = join '', keys %$romanization;
+    $re = qr/([$re])/;
+    $str =~ s/$re/$romanization->{$1}/ge;
     $str =~ s/[^a-z]//g;
     $str = substr($str . '######', 0, 5);
     return $str;
