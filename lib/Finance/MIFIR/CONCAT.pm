@@ -8,7 +8,6 @@ our $VERSION = '0.01';
 use Date::Utility;
 use Exporter 'import';
 use File::ShareDir;
-use Text::Iconv;
 use YAML::XS qw/LoadFile/;
 use utf8;
 our @EXPORT_OK = qw(mifir_concat);
