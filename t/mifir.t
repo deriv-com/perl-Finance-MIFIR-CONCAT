@@ -32,38 +32,44 @@ is mifir_concat({
     ),
     'AT19550527JOSEPSTRAU', 'Dr Joseph van der Strauss, born 27th May 1955, national of Austria and Germany';
 
-is Finance::MIFIR::CONCAT::_process_name('ßŚáŹł'), 'ssazl', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ĄŴÇĎŇ'), 'awcdn', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('êŽǍţš'), 'ezats', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ěęŐÒñ'), 'eeoon', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ĝœëşĚ'), 'goese', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('åÝćųĺ'), 'aycul', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ĵăżÔť'), 'jazot', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ÄĥÆÜĘ'), 'ahaue', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ÁďľĐą'), 'adlda', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('àÕìÍÂ'), 'aoiia', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('řïůŰÖ'), 'riuuo', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('õŒØŁȚ'), 'ooolt', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ĽÃĤæè'), 'lahae', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('éĞğçț'), 'eggct', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('űŃģÿó'), 'ungyo', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ÊúĻčÅ'), 'eulca', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ĉâÀŮő'), 'caauo', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('îŨĹĢÙ'), 'iulgu', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ıŢÎýŝ'), 'itiys', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ŤŕòŲČ'), 'trouc', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('íśÏșÛ'), 'isisu', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('đûËŵĈ'), 'duewc', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ùüžĴð'), 'uuzjd', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ŜŠÈŔã'), 'ssera', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ĆŶäȘũ'), 'cyasu', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ÚŞǎöĂ'), 'usaoa', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('þŻÓøẞ'), 'tzoos', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ôļŘķň'), 'olrkn', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('źĶŷÉń'), 'zkyen', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('ÌÞŸĜÑ'), 'itygn', 'character check';
-is Finance::MIFIR::CONCAT::_process_name('heŸĜÑ'), 'heygn', 'ascii will be kept';
-is Finance::MIFIR::CONCAT::_process_name('heŸ`1ĜÑ'), 'heygn', 'other character will be dropped';
-is Finance::MIFIR::CONCAT::_process_name('helloooo'), 'hello', 'Only first 5 characters will be kept';
-is Finance::MIFIR::CONCAT::_process_name('he'), 'he###', '# will be filled if less than 5 characters';
+my @test_cases = (
+    ['ßŚáŹł',  'ssazl', 'character check'],
+    ['ĄŴÇĎŇ',  'awcdn', 'character check'],
+    ['êŽǍţš',  'ezats', 'character check'],
+    ['ěęŐÒñ',  'eeoon', 'character check'],
+    ['ĝœëşĚ',  'goese', 'character check'],
+    ['åÝćųĺ',  'aycul', 'character check'],
+    ['ĵăżÔť',  'jazot', 'character check'],
+    ['ÄĥÆÜĘ',  'ahaue', 'character check'],
+    ['ÁďľĐą',  'adlda', 'character check'],
+    ['àÕìÍÂ',  'aoiia', 'character check'],
+    ['řïůŰÖ',  'riuuo', 'character check'],
+    ['õŒØŁȚ',  'ooolt', 'character check'],
+    ['ĽÃĤæè',  'lahae', 'character check'],
+    ['éĞğçț',  'eggct', 'character check'],
+    ['űŃģÿó',  'ungyo', 'character check'],
+    ['ÊúĻčÅ',  'eulca', 'character check'],
+    ['ĉâÀŮő',  'caauo', 'character check'],
+    ['îŨĹĢÙ',  'iulgu', 'character check'],
+    ['ıŢÎýŝ',  'itiys', 'character check'],
+    ['ŤŕòŲČ',  'trouc', 'character check'],
+    ['íśÏșÛ',  'isisu', 'character check'],
+    ['đûËŵĈ',  'duewc', 'character check'],
+    ['ùüžĴð',  'uuzjd', 'character check'],
+    ['ŜŠÈŔã',  'ssera', 'character check'],
+    ['ĆŶäȘũ',  'cyasu', 'character check'],
+    ['ÚŞǎöĂ',  'usaoa', 'character check'],
+    ['þŻÓøẞ', 'tzoos', 'character check'],
+    ['ôļŘķň',  'olrkn', 'character check'],
+    ['źĶŷÉń',  'zkyen', 'character check'],
+    ['ÌÞŸĜÑ',  'itygn', 'character check'],
+    ['heŸĜÑ',    'heygn', 'ascii will be kept'],
+    ['heŸ`1ĜÑ',  'heygn', 'other character will be dropped'],
+    ['helloooo',    'hello', 'Only first 5 characters will be kept'],
+    ['he',          'he###', '# will be filled if less than 5 characters'],
+);
+
+for my $t (@test_cases) {
+    is Finance::MIFIR::CONCAT::_process_name($t->[0]), $t->[1], $t->[2];
+}
 done_testing();
