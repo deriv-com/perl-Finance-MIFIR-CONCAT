@@ -8,10 +8,8 @@ our $VERSION = '0.01';
 use Date::Utility;
 use Exporter 'import';
 use File::ShareDir;
-use Text::Iconv;
 use YAML::XS qw/LoadFile/;
 use utf8;
-
 our @EXPORT_OK = qw(mifir_concat);
 
 =head1 NAME
@@ -41,7 +39,6 @@ Finance::MIFIR::CONCAT - provides CONCAT code generation out of client data acco
 
 =cut
 
-my $converter = Text::Iconv->new("UTF-8", "ASCII//TRANSLIT//IGNORE");
 our $config       = LoadFile(File::ShareDir::dist_file('Finance-MIFIR-CONCAT', 'mifir.yml'));
 our $romanization = LoadFile(File::ShareDir::dist_file('Finance-MIFIR-CONCAT', 'romanization.yml'));
 
@@ -58,10 +55,12 @@ sub mifir_concat {
 sub _process_name {
     my ($str) = @_;
     $str = lc($str);
-    $str =~ s/$_/$romanization->{$_}/g for keys %$romanization;
-    $str =~ s/$_\s+//g for (@{$config->{titles}}, @{$config->{prefixes}});
-    $str =~ s/’//g;    # our iconv does not handle this correctly, it returns empty string if we have it
-    $str = $converter->convert($str);
+    my $strip_re = join "|", (@{$config->{titles}}, @{$config->{prefixes}});
+    $strip_re = qr/($strip_re)\s+/;
+    $str =~ s/$strip_re//g;
+    my $re = join '', keys %$romanization;
+    $re = qr/([$re])/;
+    $str =~ s/$re/$romanization->{$1}/ge;
     $str =~ s/[^a-z]//g;
     $str = substr($str . '######', 0, 5);
     return $str;

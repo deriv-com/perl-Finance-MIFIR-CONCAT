@@ -32,11 +32,44 @@ is mifir_concat({
     ),
     'AT19550527JOSEPSTRAU', 'Dr Joseph van der Strauss, born 27th May 1955, national of Austria and Germany';
 
-is Finance::MIFIR::CONCAT::_process_name('Аркадий'),       'arkad', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Стругацкий'), 'strug', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('АЙЗЕК'),           'aizek', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Азимов'),         'azimo', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Бьёрн'),           'bern#', 'russian check';
-is Finance::MIFIR::CONCAT::_process_name('Страуструп'), 'strau', 'russian check';
+my @test_cases = (
+    ['ßŚáŹł',  'ssazl', 'character check'],
+    ['ĄŴÇĎŇ',  'awcdn', 'character check'],
+    ['êŽǍţš',  'ezats', 'character check'],
+    ['ěęŐÒñ',  'eeoon', 'character check'],
+    ['ĝœëşĚ',  'goese', 'character check'],
+    ['åÝćųĺ',  'aycul', 'character check'],
+    ['ĵăżÔť',  'jazot', 'character check'],
+    ['ÄĥÆÜĘ',  'ahaue', 'character check'],
+    ['ÁďľĐą',  'adlda', 'character check'],
+    ['àÕìÍÂ',  'aoiia', 'character check'],
+    ['řïůŰÖ',  'riuuo', 'character check'],
+    ['õŒØŁȚ',  'ooolt', 'character check'],
+    ['ĽÃĤæè',  'lahae', 'character check'],
+    ['éĞğçț',  'eggct', 'character check'],
+    ['űŃģÿó',  'ungyo', 'character check'],
+    ['ÊúĻčÅ',  'eulca', 'character check'],
+    ['ĉâÀŮő',  'caauo', 'character check'],
+    ['îŨĹĢÙ',  'iulgu', 'character check'],
+    ['ıŢÎýŝ',  'itiys', 'character check'],
+    ['ŤŕòŲČ',  'trouc', 'character check'],
+    ['íśÏșÛ',  'isisu', 'character check'],
+    ['đûËŵĈ',  'duewc', 'character check'],
+    ['ùüžĴð',  'uuzjd', 'character check'],
+    ['ŜŠÈŔã',  'ssera', 'character check'],
+    ['ĆŶäȘũ',  'cyasu', 'character check'],
+    ['ÚŞǎöĂ',  'usaoa', 'character check'],
+    ['þŻÓøẞ', 'tzoos', 'character check'],
+    ['ôļŘķň',  'olrkn', 'character check'],
+    ['źĶŷÉń',  'zkyen', 'character check'],
+    ['ÌÞŸĜÑ',  'itygn', 'character check'],
+    ['heŸĜÑ',    'heygn', 'ascii will be kept'],
+    ['heŸ`1ĜÑ',  'heygn', 'other character will be dropped'],
+    ['helloooo',    'hello', 'Only first 5 characters will be kept'],
+    ['he',          'he###', '# will be filled if less than 5 characters'],
+);
 
+for my $t (@test_cases) {
+    is Finance::MIFIR::CONCAT::_process_name($t->[0]), $t->[1], $t->[2];
+}
 done_testing();
