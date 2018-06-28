@@ -6,20 +6,13 @@ use Finance::MIFIR::CONCAT qw/mifir_concat/;
 use utf8;
 
 subtest 'mifir config' => sub {
-    my $config = $Finance::MIFIR::CONCAT::config;
-
+    my $config    = $Finance::MIFIR::CONCAT::config;
     my $countries = $config->{countries};
-
-    my $count;
-    my @codes;
-    foreach my $country_code (keys %$countries) {
-        if ( exists $countries->{$country_code}->{CONCAT} ) {
-            $count++;
-            push @codes, $country_code;
-        };
-    }
-
-    is_deeply([sort @codes], [qw/AT BG CY CZ DE DK FI FR GB GR HR HU IE LI LT LV LX NL NO PT RO SE SK SL/], 'Correct list of countries code with CONCAT present');
+    is_deeply(
+        [sort grep { exists $countries->{$_}->{CONCAT} } keys %$countries],
+        [qw/AT BG CY CZ DE DK FI FR GB GR HR HU IE LI LT LV LX NL NO PT RO SE SK SL/],
+        'Correct list of countries code with CONCAT present'
+    );
 };
 
 subtest 'mifir concat' => sub {
