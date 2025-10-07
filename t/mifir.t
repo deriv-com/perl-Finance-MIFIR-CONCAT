@@ -24,6 +24,14 @@ subtest 'mifir concat' => sub {
         }
         ),
         'FR19860317ELISADOE##', 'Elisabeth Doe, born 17th March 1986, French national:';
+     is mifir_concat({
+            cc         => 'fr',
+            date       => '17-03-1986',
+            first_name => 'ZqweO ANDRES',
+            last_name  => 'CASTEbeed ROggas',
+        }
+        ),
+        'FR19860317ZQWEOCASTE', 'ZqweO ANDRES, born 17th March 1986, French national:';
 
     is mifir_concat({
             cc         => 'se',

@@ -56,7 +56,7 @@ sub _process_name {
     my ($str) = @_;
     $str = lc($str);
     my $strip_re = join "|", (@{$config->{titles}}, @{$config->{prefixes}});
-    $strip_re = qr/($strip_re)\s+/;
+    $strip_re = qr/\b($strip_re)\s+/i;
     $str =~ s/$strip_re//g;
     my $re = join '', keys %$romanization;
     $re = qr/([$re])/;
