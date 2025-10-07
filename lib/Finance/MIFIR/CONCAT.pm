@@ -55,15 +55,23 @@ sub mifir_concat {
 sub _process_name {
     my ($str) = @_;
     $str = lc($str);
+    
+    # Remove titles and prefixes with word boundary
     my $strip_re = join "|", (@{$config->{titles}}, @{$config->{prefixes}});
     $strip_re = qr/\b($strip_re)\s+/i;
     $str =~ s/$strip_re//g;
+    $str =~ s/\s+.*$//;  # Remove everything after first space
+
+    # Romanization
     my $re = join '', keys %$romanization;
     $re = qr/([$re])/;
     $str =~ s/$re/$romanization->{$1}/ge;
+    
+    # Remove non-alphabetic characters
     $str =~ s/[^a-z]//g;
+    
+    # Pad to 5 characters
     $str = substr($str . '######', 0, 5);
     return $str;
 }
-
 1;
