@@ -32,7 +32,7 @@ subtest 'mifir concat' => sub {
             last_name  => 'Casdffbass Fasdff',
         }
         ),
-        'FR19860317JUAN#CASDF', 'ZqweO ANDRES, born 17th March 1986, French national:';
+        'FR19860317JUAN#CASDF', 'Juan Casdffbass, born 17th March 1986, French national:';
 
 	
 	is mifir_concat({
