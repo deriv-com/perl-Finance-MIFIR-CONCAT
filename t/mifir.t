@@ -54,6 +54,15 @@ subtest 'mifir concat' => sub {
         'SE19441202ROBERONEAL', 'Robert O\'Neal, born 2nd December 1944, national of Sweden and Canada';
 
     is mifir_concat({
+            cc         => 'se',
+            date       => '02-12-1944',
+            first_name => 'MAPULA Robert',
+            last_name  => 'MOGASNS CAR',
+        }
+        ),
+        'SE19441202MAPULMOGAS', 'MAPULA Robert, born 2nd December 1944, national of Sweden and Canada';
+
+    is mifir_concat({
             cc         => 'AT',
             date       => '27-05-1955',
             first_name => 'Dr Joseph',
