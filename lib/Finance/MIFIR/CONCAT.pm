@@ -3,7 +3,7 @@ use 5.014;
 use warnings;
 use strict;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Date::Utility;
 use Exporter 'import';
