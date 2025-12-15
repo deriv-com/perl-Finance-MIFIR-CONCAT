@@ -1,5 +1,7 @@
 Revision history for Finance::MIFIR::CONCAT
 
 {{$NEXT}}
-  Initial release
+   - fixes for MIFIR format issues
 
+0.01      2023-09-26 16:04:05 CST
+        - Initial release
